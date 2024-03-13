@@ -5,9 +5,8 @@ import './style.css'
 // import "./homework/01-homework-types"
 // import "./topics/04-basic-destructuring"
 // import "./topics/05-function-destructuring"
-
-import "./homework/02-homework-desestructuring";
-
+// import "./homework/02-homework-desestructuring";
+import "./topics/06-import-export"
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
  Okay, letsgoooo!
