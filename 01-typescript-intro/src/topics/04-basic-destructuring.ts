@@ -28,13 +28,18 @@ const song = "New Song";
 const { song: anotherSong, audioVolume: volume, details } = audioPlayer;
 const { author } = details;
 
-console.log("Song: ", song);
-console.log("Song: ", anotherSong);
-console.log("AudioVolume :", volume);
-console.log("Author: ", author);
+// console.log("Song: ", song);
+// console.log("Song: ", anotherSong);
+// console.log("AudioVolume :", volume);
+// console.log("Author: ", author);
 
 
 
+const [, , sonGohan, piccolo="Not Found"] = ["Goku", "Vegeta", "SonGohan"];
+
+
+
+console.log("Personaje 3: ", piccolo);
 
 
 

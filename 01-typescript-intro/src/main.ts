@@ -3,8 +3,10 @@ import './style.css'
 // import "./topics/02-object-interface"
 // import "./topics/03-functions"
 // import "./homework/01-homework-types"
+// import "./topics/04-basic-destructuring"
+// import "./topics/05-function-destructuring"
 
-import "./topics/04-basic-destructuring"
+import "./homework/02-homework-desestructuring";
 
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
