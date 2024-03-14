@@ -5,14 +5,14 @@ import { Component } from "@angular/core";
 @Component({
   template:`
 
-  <h1>SALUDAR COMPONENT</h1>
+  <h3>SALUDAR COMPONENT</h3>
 
 
   <p>Saludo: {{mensaje}}</p>
   <button (click)="saludar()">Saludar</button>
 
   `,
-  selector:"saludo-component"
+  selector:"app-saludo"
 
 })
 export class SaludoComponent{
