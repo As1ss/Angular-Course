@@ -40,5 +40,7 @@ export class HeroComponent {
     this.age=45;
   }
 
-
 }
+
+
+

@@ -1,1 +1,14 @@
-<p>list works!</p>
+
+
+<h3>Listado de Héroes</h3>
+
+
+
+
+<ul class="mt-2 list-group">
+  <li appHoverBackground *ngFor="let item of heroNames"
+  class="list-group-item">{{item}}</li>
+</ul>
+
+<button (click)="deleteLastHeroName()"
+class="btn btn-outline-danger mt-2">Borrar último héroe</button>
