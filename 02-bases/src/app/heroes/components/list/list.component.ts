@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { HeroComponent } from '../hero/hero.component';
-import { lastValueFrom } from 'rxjs';
+
 
 @Component({
   selector: 'app-heroes-list',
