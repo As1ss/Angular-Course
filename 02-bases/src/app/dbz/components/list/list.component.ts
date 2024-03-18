@@ -22,7 +22,11 @@ export class ListComponent {
 
 
 
-  public deleteCharacter(id:string):void{
+  public deleteCharacter(id?:string):void{
+
+    if(id==="") return;
+
+
 
     this.onDeleteCharacter.emit(id);
   }
