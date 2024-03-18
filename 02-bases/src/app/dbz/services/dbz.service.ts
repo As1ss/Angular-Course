@@ -35,10 +35,18 @@ export class DbzService {
 
 
   public addCharacter(character: Character): void {
-    this.characters.push(character);
+
+    //Creamos una constante para que cuando se cree un character
+    //se le asigne un uuid automáticamente
+    const newCharacter:Character = {id:uuid(),...character}; // ... sirve para decir que vienen mas argumentos en ese ojbeto
+    console.log({newCharacter});
+    this.characters.push(newCharacter);
   }
 
-  public deleteCharacter(index: number): void {
+  public deleteCharacterbyId(id:string): void {
+
+    const index = this.characters.findIndex(character=>character.id===id);
+
     this.characters.splice(index, 1);
   }
 

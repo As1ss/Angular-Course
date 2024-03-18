@@ -10,7 +10,7 @@ export class ListComponent {
 
 
   @Output()
-  public onDeleteCharacter:EventEmitter<number> = new EventEmitter();
+  public onDeleteCharacter:EventEmitter<string> = new EventEmitter();
 
 
 
@@ -22,9 +22,9 @@ export class ListComponent {
 
 
 
-  public deleteCharacter(index:number):void{
+  public deleteCharacter(id:string):void{
 
-    this.onDeleteCharacter.emit(index);
+    this.onDeleteCharacter.emit(id);
   }
 
 
