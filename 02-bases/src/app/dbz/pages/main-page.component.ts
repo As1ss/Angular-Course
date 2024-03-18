@@ -33,4 +33,8 @@ public addCharacter(character:Character):void{
     this.characters.push(character);
 }
 
+public deleteCharacter(index:number):void{
+  this.characters.splice(index,1);
+}
+
 }
