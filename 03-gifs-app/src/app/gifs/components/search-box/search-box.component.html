@@ -1,5 +1,8 @@
 
 <h5>Buscar: </h5>
-<input type="text"
+<input #txtTagInput type="text"
 class="form-control"
-placeholder="Buscar gifs...">
+placeholder="Buscar gifs..."
+(keyup.enter)="searchTag()"
+
+>
