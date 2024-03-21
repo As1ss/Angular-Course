@@ -12,6 +12,7 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
 
   private _tagsHistory: string[] = [];
   private apiKey: string = "4rO3V8mG9Amk9C3k6AQEEGktDssC5K00";
+  private apiKey2: string = "TdNNqBtGaYLre7OPhriYIsFYZT6ajuLM";
   private serviceUrl: string = "https://api.giphy.com/v1/gifs";
 
   constructor(private http: HttpClient) {
@@ -34,7 +35,7 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
     this.validateHistory(tag);
 
     const params = new HttpParams()
-      .set("api_key", this.apiKey)
+      .set("api_key", this.apiKey2)
       .set("q", tag)
       .set("limit", "10");
 
