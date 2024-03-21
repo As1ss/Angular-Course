@@ -8,7 +8,7 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
   providedIn: "root"
 }) export class GifsService {
 
-  public gifList:Gif[] =[];
+  public gifList: Gif[] = [];
 
   private _tagsHistory: string[] = [];
   private apiKey: string = "4rO3V8mG9Amk9C3k6AQEEGktDssC5K00";
@@ -30,16 +30,16 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
     this.validateHistory(tag);
 
     const params = new HttpParams()
-    .set("api_key",this.apiKey)
-    .set("q",tag)
-    .set("limit","10");
+      .set("api_key", this.apiKey)
+      .set("q", tag)
+      .set("limit", "10");
 
 
-    this.http.get<SearchResponse>(`${this.serviceUrl}/search`,{params})
+    this.http.get<SearchResponse>(`${this.serviceUrl}/search`, { params })
       .subscribe(resp => {
-       this.gifList = resp.data;
-
-       console.log({gifs:this.gifList});
+        this.gifList = resp.data;
+        const gifs = this.gifList;
+        //  console.log({gifs});
 
       });
 
