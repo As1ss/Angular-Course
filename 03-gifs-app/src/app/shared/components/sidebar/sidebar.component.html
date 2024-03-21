@@ -3,9 +3,14 @@
   <hr class="text-white border-2">
 
   <div class="list-group list-reset">
-    <button *ngFor="let item of tagsHistory"
+    <button
+    *ngFor="let item of tagsHistory"
+    (click)="reSearch(item)"
      class="list-group-item list-group-item-action">
      {{item | titlecase}}
+
+
+
     </button>
   </div>
 
