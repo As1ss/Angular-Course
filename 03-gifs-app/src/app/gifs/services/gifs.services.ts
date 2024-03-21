@@ -34,16 +34,12 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
       .set("q", tag)
       .set("limit", "10");
 
-
     this.http.get<SearchResponse>(`${this.serviceUrl}/search`, { params })
       .subscribe(resp => {
         this.gifList = resp.data;
         const gifs = this.gifList;
         //  console.log({gifs});
-
       });
-
-
 
   }
 
@@ -55,15 +51,19 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
     if (this._tagsHistory.includes(finalTag)) {
 
       this._tagsHistory.splice(this._tagsHistory.indexOf(finalTag), 1);
-
       this._tagsHistory.unshift(finalTag);
-
     }
     else {
+
       this._tagsHistory.unshift(finalTag);
       this._tagsHistory.splice(10);
+      this.saveLocalStorage();
 
     }
+  }
+
+  private saveLocalStorage():void{
+    localStorage.setItem("history",JSON.stringify(this._tagsHistory));
   }
 }
 
