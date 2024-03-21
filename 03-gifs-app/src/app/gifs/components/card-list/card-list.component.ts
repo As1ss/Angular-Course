@@ -10,4 +10,7 @@ import { Gif } from "../../interfaces/gifs.interfaces";
   @Input()
   public gifsCardList:Gif[] = [];
 
+
+
+
 }

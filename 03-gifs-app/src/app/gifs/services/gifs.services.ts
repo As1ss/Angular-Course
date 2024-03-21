@@ -14,7 +14,11 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
   private apiKey: string = "4rO3V8mG9Amk9C3k6AQEEGktDssC5K00";
   private serviceUrl: string = "https://api.giphy.com/v1/gifs";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+   this.loadLocalStorage();
+
+
+   }
 
   public get tagsHistory() {
 
@@ -37,8 +41,7 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
     this.http.get<SearchResponse>(`${this.serviceUrl}/search`, { params })
       .subscribe(resp => {
         this.gifList = resp.data;
-        const gifs = this.gifList;
-        //  console.log({gifs});
+
       });
 
   }
@@ -52,18 +55,36 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
 
       this._tagsHistory.splice(this._tagsHistory.indexOf(finalTag), 1);
       this._tagsHistory.unshift(finalTag);
+     // this.deleteLocalStorage();
+      this.saveLocalStorage();
     }
     else {
-
       this._tagsHistory.unshift(finalTag);
       this._tagsHistory.splice(10);
+      //this.deleteLocalStorage();
       this.saveLocalStorage();
+
 
     }
   }
 
   private saveLocalStorage():void{
+
     localStorage.setItem("history",JSON.stringify(this._tagsHistory));
+
+  }
+  private deleteLocalStorage():void{
+    localStorage.clear();
+  }
+
+  private loadLocalStorage():void{
+
+    if(!localStorage.getItem("history")) return ;
+
+    this._tagsHistory = JSON.parse(localStorage.getItem("history")!);
+
+    this.searchTag(this._tagsHistory[0])
+
   }
 }
 
