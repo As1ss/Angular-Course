@@ -22,5 +22,9 @@ import { Component, Input, OnInit } from "@angular/core";
 
   public hideLoader() {
     this.showLoader= false;
-  }
+
+  //   setTimeout(() => {
+        //Esto es para crear un segundo hasta ejecutar una operación
+  //   }, 10000);
+   }
 }
