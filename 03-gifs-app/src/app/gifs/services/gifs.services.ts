@@ -13,7 +13,7 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
   private _tagsHistory: string[] = [];
   private apiKey: string = "4rO3V8mG9Amk9C3k6AQEEGktDssC5K00";
   private apiKey2: string = "TdNNqBtGaYLre7OPhriYIsFYZT6ajuLM";
-  private serviceUrl: string = "https://api.giphy.com/v1/gifs";
+  private _serviceUrl: string = "https://api.giphy.com/v1/gifs";
 
   constructor(private http: HttpClient) {
    this.loadLocalStorage();
@@ -28,6 +28,10 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
 
   }
 
+  public get serviceUrl():string{
+    return this._serviceUrl;
+  }
+
 
 
   public searchTag(tag: string): void {
@@ -39,7 +43,7 @@ import { Gif, SearchResponse } from "../interfaces/gifs.interfaces";
       .set("q", tag)
       .set("limit", "10");
 
-    this.http.get<SearchResponse>(`${this.serviceUrl}/search`, { params })
+    this.http.get<SearchResponse>(`${this._serviceUrl}/search`, { params })
       .subscribe(resp => {
         this.gifList = resp.data;
 
