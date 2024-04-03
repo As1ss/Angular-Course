@@ -1,9 +1,12 @@
 <hr>
-<p>shopping-cart works</p>
 
-<shopping-cart-item></shopping-cart-item>
-<shopping-cart-item></shopping-cart-item>
 
-<p class="total"><span ngClass="total-label">total:</span>000.0€</p>
+<shopping-cart-item [cartItem]="cartItems[0]"></shopping-cart-item>
+<shopping-cart-item [cartItem]="cartItems[1]"></shopping-cart-item>
 
-<button>Finalizar Pedido</button>
+<div class="col col-md-4 offset-md-2">
+<span class="align-right">Total: 00.00€</span>
+</div>
+
+
+<button class="btn btn-primary">Finalizar Pedido</button>

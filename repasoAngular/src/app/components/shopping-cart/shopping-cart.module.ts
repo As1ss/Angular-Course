@@ -7,7 +7,8 @@ import { CommonModule } from "@angular/common";
 @NgModule({
   declarations:[
     ShoppingCartComponent,
-    ShoppingCartItemComponent
+    ShoppingCartItemComponent,
+
   ],
   imports:[
     CommonModule
