@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FirstComponent } from './components/first/first.component';
 import { InventoryModule } from './components/inventory/inventory.module';
+import { ShoppingCartModule } from './components/shopping-cart/shopping-cart.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { InventoryModule } from './components/inventory/inventory.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    InventoryModule
+    InventoryModule,
+    ShoppingCartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

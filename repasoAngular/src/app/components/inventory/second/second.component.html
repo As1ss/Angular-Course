@@ -1,3 +1,8 @@
 
 
 <p>second component works!</p>
+
+<input type="text" [disabled]="isDisabled" [maxLength]="maxLength">
+
+<p>{{counter}}</p>
+<button (click)="increaseCounter()" class="btn btn-primary" >Increase counter</button>
