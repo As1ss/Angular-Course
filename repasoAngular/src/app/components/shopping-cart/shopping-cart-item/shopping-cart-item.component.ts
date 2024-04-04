@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CartItem } from "./shopping-cart-item.interface";
 
 
@@ -13,6 +13,10 @@ import { CartItem } from "./shopping-cart-item.interface";
   @Input()
    cartItem!:CartItem;
 
+
+   @Output()
+   cartItemDelete = new EventEmitter<void>();
+
    constructor(){}
 
    ngOnInit(): void {
@@ -20,10 +24,10 @@ import { CartItem } from "./shopping-cart-item.interface";
   }
 
 
-  // deleteItem(cartItem:CartItem):void{
+  onClickDeletedItem():void{
+    this.cartItemDelete.emit();
+  }
 
-  //   this.cartItems.slice(this.cartItems.indexOf(cartItem),1);
-  // }
 
 
 }

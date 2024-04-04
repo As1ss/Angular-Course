@@ -1,5 +1,5 @@
 import { Component, ElementRef, Output } from "@angular/core";
-import { CartItem } from "./shopping-cart-item/shopping-cart-item.interface";
+import { CartItem } from './shopping-cart-item/shopping-cart-item.interface';
 
 
 @Component({
@@ -8,7 +8,9 @@ import { CartItem } from "./shopping-cart-item/shopping-cart-item.interface";
 }) export class ShoppingCartComponent{
 
 
-  cartItems:CartItem[]=[{
+
+
+  public cartItems:CartItem[]=[{
     name:"Auriculares",
     price:255
   },
@@ -22,6 +24,19 @@ import { CartItem } from "./shopping-cart-item/shopping-cart-item.interface";
 }]
 
 
+deleteItem(item:CartItem):void{
+  this.cartItems.splice(this.cartItems.indexOf(item),1);
+}
+
+sumaTodo():number{
+
+  let suma:number=0;
+
+  for (let item of this.cartItems){
+    suma += item.price;
+  }
+  return suma;
+}
 
 
 }
