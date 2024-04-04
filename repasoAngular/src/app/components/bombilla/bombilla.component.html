@@ -1,0 +1,16 @@
+<hr>
+<h3>Directivas</h3>
+<p class="fw-bold">Ng If-Else</p>
+
+
+<div *ngIf="encenderBombisha;else ApagarBombisha">
+<img src="assets/encendida.png" class="mx-auto d-block">
+<button (click)="onClickListener()" class="mx-auto d-block btn btn-primary">Apagar</button>
+</div>
+
+<ng-template #ApagarBombisha>
+<div>
+<img src="assets/apagada.png" class="mx-auto d-block">
+<button (click)="onClickListener()" class="mx-auto d-block btn btn-primary">Encender</button>
+</div>
+</ng-template>

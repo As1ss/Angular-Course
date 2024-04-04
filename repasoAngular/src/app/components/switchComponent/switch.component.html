@@ -1,0 +1,16 @@
+
+
+<p class="fw-bold">Ng Switch</p>
+
+<p>
+  Estado:
+  <ng-container [ngSwitch]="orderStatus">
+
+    <ng-container *ngSwitchCase="os.InPreparation">En preparación</ng-container>
+    <ng-container *ngSwitchCase="os.Prepared">Preparado</ng-container>
+    <ng-container *ngSwitchCase="os.InTransit">En tránsito</ng-container>
+    <ng-container *ngSwitchCase="os.Delivered">Entregado</ng-container>
+    <ng-container *ngSwitchCase="os.Rejected">Rechazado</ng-container>
+
+  </ng-container>
+</p>

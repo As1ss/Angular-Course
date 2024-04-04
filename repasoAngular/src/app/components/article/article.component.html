@@ -1,0 +1,9 @@
+
+<p class="fw-bold">Articulos</p>
+
+<article-item *ngFor="let item of articles; trackBy: trackByItemId"
+[item]="item"></article-item>
+
+<button (click)="addNewElement()" class="btn btn-primary">Añadir Nuevo</button>
+<button (click)="reverseList()" class="btn btn-primary ms-4">Invertir</button>
+<button (click)="reloadFromSErver()" class="btn btn-primary ms-4">Recargar</button>
