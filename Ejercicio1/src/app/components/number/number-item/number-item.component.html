@@ -1,0 +1,10 @@
+
+
+<li>
+  <ng-container [ngSwitch]="true">
+    <ng-container *ngSwitchCase="num > 0" ><span class="text-success fw-bold"> {{ num }} </span> positivo </ng-container>
+    <ng-container *ngSwitchCase="num < 0"> <span class="text-danger fw-bold"> {{ num }} </span> negativo </ng-container>
+    <ng-container *ngSwitchCase="num===0"><span class="text-warning fw-bold">0</span>  es cero</ng-container>
+  </ng-container>
+</li>
+
