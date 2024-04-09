@@ -9,7 +9,7 @@ import { Country } from "../interfaces/country";
   providedIn:"root"
 })export class CountriesService{
 
-  apiURL:string = "https://restcountries.com/3.1";
+  apiURL:string = "https://restcountries.com/v3.1";
 
   constructor(private httpClient:HttpClient){}
 
