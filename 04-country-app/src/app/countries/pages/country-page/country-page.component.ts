@@ -9,6 +9,7 @@ import { Country } from '../../interfaces/country';
   styles: ``
 })
 export class CountryPageComponent implements OnInit {
+[x: string]: any;
 
   public country?: Country;
 
