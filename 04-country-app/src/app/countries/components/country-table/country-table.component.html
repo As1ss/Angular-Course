@@ -27,7 +27,7 @@ No hay resultados que mostrar.
       <td>{{country.capital}}</td>
       <td>{{country.population | number}}</td>
       <td>
-        <a href="#">Ver más.</a>
+        <a [routerLink]="['/countries/by',country.cca2]">Info.</a>
       </td>
     </tr>
   </tbody>
