@@ -9,14 +9,14 @@ import { CountriesService } from '../../services/countries.service';
 })
 export class ByRegionPageComponent {
 
-  public countries:Country[] = [];
+  public countries: Country[] = [];
 
-  constructor(private countriesService:CountriesService){}
+  constructor(private countriesService: CountriesService) { }
 
 
-  searchByRegionPage(term:string):void{
+  searchByRegionPage(term: string): void {
     this.countriesService.searchRegion(term)
-    .subscribe(countries=>this.countries=countries);
+      .subscribe(countries => this.countries = countries);
 
   }
 
