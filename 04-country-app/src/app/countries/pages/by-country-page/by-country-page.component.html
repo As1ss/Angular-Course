@@ -1,21 +1,18 @@
 <h2>Por País</h2>
-<hr>
-
+<hr />
 
 <div class="row">
-  <!-- Search box -->
-
   <div class="col">
-    <shared-search-box placeholder="Introduce la capital..."
-    (messageDebounce)="searchByCountryPage($event)"></shared-search-box>
+    <shared-search-box
+      placeholder="Introduce la capital..."
+      (messageDebounce)="searchByCountryPage($event)"
+    ></shared-search-box>
   </div>
 </div>
 
 <div class="row">
   <div class="col">
-    <hr>
-    <!-- <countries-table></countries-table> -->
+    <hr />
     <countries-table [countries]="countries"></countries-table>
   </div>
 </div>
-
