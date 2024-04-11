@@ -19,8 +19,8 @@ import { Country } from "../interfaces/country";
 
 
     return this.httpClient.get<Country[]>(url).pipe(
-      catchError(error => of([])),
-      delay(2000) // Este pipe captura el error si salta y devuelve un Array vacio de Observables
+      catchError(error => of([])), // Este pipe captura el error si salta y devuelve un Array vacio de Observables
+      delay(1000)
     );
 
   }

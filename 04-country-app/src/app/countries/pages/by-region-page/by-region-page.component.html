@@ -6,9 +6,14 @@
 <div class="row">
   <!-- Search box -->
 
-  <div class="col">
-    <shared-search-box placeholder="Introduce la región..."
-    (messageSearched)="searchByRegionPage($event)"></shared-search-box>
+  <div class="col text-center">
+  <button
+  class="btn mx-2"
+  [ngClass]="{'btn-outline-primary': region===selectedRegion}"
+
+  (click)="searchByRegionPage(region)"  *ngFor="let region of regions">
+    {{region}}
+  </button>
   </div>
 </div>
 

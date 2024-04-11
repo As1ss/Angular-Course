@@ -1,6 +1,6 @@
-
+<!-- (keyup.enter)="sendMessage(txtInput.value)" -->
 
 <input type="text" class="form-control"
  [placeholder]="placeholder" #txtInput
- (keyup.enter)="sendMessage(txtInput.value)"
+ (keyup)="onKeyPress(txtInput.value)"
  >
