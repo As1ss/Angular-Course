@@ -7,6 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { Subject, Subscription, debounceTime } from 'rxjs';
+import { Region } from '../../../countries/interfaces/region.type';
 
 @Component({
   selector: 'shared-search-box',
@@ -27,6 +28,8 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
 
   @Input()
   public initialValue: string = '';
+
+
 
   sendMessage(value: string): void {
     this.messageSearched.emit(value);

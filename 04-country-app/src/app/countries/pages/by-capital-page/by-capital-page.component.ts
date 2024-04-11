@@ -23,10 +23,13 @@ export class ByCapitalPageComponent implements OnInit {
   constructor(private countryService: CountriesService) {}
 
   searchByCapitalPage(term: string): void {
+
     this.isLoading = true;
 
     this.countryService.searchCapital(term).subscribe((countries) => {
+
       this.countries = countries;
+
       this.isLoading = false;
     });
   }
