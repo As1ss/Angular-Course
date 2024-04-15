@@ -45,7 +45,7 @@ export class UncommonPageComponent {
     public person = {
       name:"Alexis",
       age:29,
-      address: "Burgos, España"
+      address: "Asturias, España"
     }
 
 
