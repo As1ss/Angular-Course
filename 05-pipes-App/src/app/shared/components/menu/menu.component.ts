@@ -44,7 +44,8 @@ export class MenuComponent {
         items: [
           {
             label: "Otro elemento",
-            icon: "pi pi-cog"
+            icon: "pi pi-wrench",
+            routerLink:"custom"
           }
         ]
       }
