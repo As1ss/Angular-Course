@@ -8,6 +8,7 @@ import { NumbersPageComponent } from './pages/numbers-page/numbers-page.componen
 import { UncommonPageComponent } from './pages/uncommon-page/uncommon-page.component';
 import { OrderComponent } from './pages/order/order.component';
 import { ToggleClasePipe } from './pipes/toggle-case.pipe';
+import { CanFlyPipe } from './pipes/can-fly.pipe';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ToggleClasePipe } from './pipes/toggle-case.pipe';
     UncommonPageComponent,
     OrderComponent,
     //Pipes
-    ToggleClasePipe
+    ToggleClasePipe,
+    CanFlyPipe
   ],
   imports: [
     CommonModule,
