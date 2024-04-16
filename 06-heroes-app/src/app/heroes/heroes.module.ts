@@ -6,7 +6,8 @@ import { ListPageComponent } from './pages/list-page/list-page.component';
 import { NewPageComponent } from './pages/new-page/new-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
-import {MatButtonModule} from '@angular/material/button';
+import { MaterialModule } from '../material/material.module';
+
 
 
 
@@ -22,7 +23,7 @@ import {MatButtonModule} from '@angular/material/button';
   imports: [
     CommonModule,
     HeroesRoutingModule,
-    MatButtonModule
+    MaterialModule
   ]
 })
 export class HeroesModule { }
