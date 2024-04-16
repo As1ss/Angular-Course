@@ -6,6 +6,7 @@ import { ListPageComponent } from './pages/list-page/list-page.component';
 import { NewPageComponent } from './pages/new-page/new-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -15,11 +16,13 @@ import { HeroesRoutingModule } from './heroes-routing.module';
     LayoutPageComponent,
     ListPageComponent,
     NewPageComponent,
-    SearchPageComponent
+    SearchPageComponent,
+
   ],
   imports: [
     CommonModule,
-    HeroesRoutingModule
+    HeroesRoutingModule,
+    MatButtonModule
   ]
 })
 export class HeroesModule { }
