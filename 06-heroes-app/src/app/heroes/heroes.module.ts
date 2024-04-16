@@ -11,6 +11,7 @@ import { MaterialModule } from '../material/material.module';
 
 
 
+
 @NgModule({
   declarations: [
     HeroPageComponent,
@@ -19,11 +20,12 @@ import { MaterialModule } from '../material/material.module';
     NewPageComponent,
     SearchPageComponent,
 
+
   ],
   imports: [
     CommonModule,
     HeroesRoutingModule,
     MaterialModule
-  ]
+  ],
 })
 export class HeroesModule { }
