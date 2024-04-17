@@ -8,6 +8,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { CardComponent } from './components/card/card.component';
+import { HeroPipeComponent } from './pipes/hero-image.pipe';
 
 
 
@@ -15,12 +16,16 @@ import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
+    CardComponent,
     HeroPageComponent,
     LayoutPageComponent,
     ListPageComponent,
     NewPageComponent,
     SearchPageComponent,
-    CardComponent,
+
+    //Pipes
+
+    HeroPipeComponent,
 
 
   ],
