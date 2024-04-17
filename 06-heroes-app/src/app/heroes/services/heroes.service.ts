@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
 import { Hero } from '../interfaces/hero.interface';
 import { enviroments } from '../../../enviroments/enviroments';
 
@@ -10,13 +10,25 @@ import { enviroments } from '../../../enviroments/enviroments';
 
 export class HeroesService {
 
-  constructor(private httpClient: HttpClient) {}
 
   private baseUrl: string = enviroments.baseUrl;
+
+  constructor(private httpClient: HttpClient) {}
+
 
   getHeroes(): Observable<Hero[]> {
 
     return this.httpClient.get<Hero[]>(`${this.baseUrl}/heroes`);
+
+  }
+
+  getHeroById(id:string):Observable<Hero | undefined>{
+
+
+    return this.httpClient.get<Hero>(`${this.baseUrl}/heroes/${id}`)
+    .pipe(
+      catchError(error => of(undefined))
+    )
 
   }
 }
