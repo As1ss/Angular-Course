@@ -32,9 +32,15 @@ import { Observable, tap } from 'rxjs';
    return this.http.get<User>(`${this._baseURL}/users/1`)
    .pipe(
     tap(user=> this._user = user),
-    tap(user=>localStorage.setItem("token",user.id.toString()))
+    tap(user=>localStorage.setItem("token","waekaekwa.21312mA.m765m7"))
    )
 
   }
+
+  logout(){
+    this._user = undefined;
+    localStorage.clear();
+  }
+
 
 }
