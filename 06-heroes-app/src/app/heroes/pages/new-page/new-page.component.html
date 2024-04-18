@@ -59,13 +59,14 @@
 
         <div class="flex justify-content-between">
 
-        <button mat-flat-button
+        <button mat-flat-button (click)="onDeleteHero()"
         color="warn"
         *ngIf="currentHero.id">
         Borrar
       </button>
       <span></span>
-        <button mat-flat-button color="primary" (click)="onSubmit()">
+        <button mat-flat-button color="primary" (click)="onSubmit()"
+        >
           <mat-icon>save</mat-icon>
           Guardar
         </button>
