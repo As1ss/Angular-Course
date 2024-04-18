@@ -1,8 +1,10 @@
-<h1>
-  Editar / Agregar
-  héroe
+<h1 *ngIf="!currentHero.id; else edit">Agregar héroe</h1>
+<ng-template #edit>
+<h1>Editar héroe
   <small>{{currentHero.superhero}}</small>
 </h1>
+</ng-template>
+
 <mat-divider class="mb-2"></mat-divider>
 
 <div class="grid">
@@ -57,13 +59,17 @@
 
         <div class="flex justify-content-between">
 
-        <button mat-flat-button color="warn">Borrar</button>
+        <button mat-flat-button
+        color="warn"
+        *ngIf="currentHero.id">
+        Borrar
+      </button>
+      <span></span>
         <button mat-flat-button color="primary" (click)="onSubmit()">
           <mat-icon>save</mat-icon>
           Guardar
-
-
         </button>
+
       </div>
 
       </mat-card-content>
