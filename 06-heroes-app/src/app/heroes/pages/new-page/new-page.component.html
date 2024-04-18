@@ -1,7 +1,7 @@
 <h1>
   Editar / Agregar
   héroe
-  <small>Superman</small>
+  <small>{{currentHero.superhero}}</small>
 </h1>
 <mat-divider class="mb-2"></mat-divider>
 
@@ -61,6 +61,8 @@
         <button mat-flat-button color="primary" (click)="onSubmit()">
           <mat-icon>save</mat-icon>
           Guardar
+
+
         </button>
       </div>
 
@@ -75,7 +77,11 @@
       <img mat-card-image [src]="currentHero | heroImage" alt="Imagen del héroe"/>
     </mat-card>
 
+
   </div>
 </div>
+
+
+
 
 
