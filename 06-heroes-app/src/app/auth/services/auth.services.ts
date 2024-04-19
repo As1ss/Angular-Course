@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { enviroments } from '../../../enviroments/enviroments';
 import { User } from '../interfaces/user.interface';
-import { Observable, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 
 
 
@@ -40,6 +40,21 @@ import { Observable, tap } from 'rxjs';
   logout(){
     this._user = undefined;
     localStorage.clear();
+  }
+
+  checkAuthentication():Observable<boolean> {
+
+    if(!localStorage.getItem("token")) return of(false);
+
+    const token = localStorage.getItem("token");
+
+    return this.http.get<User>(`${ this._baseURL }/users/1`)
+    .pipe(
+      tap( user => this._user=user ),
+      map( user => !!user ),
+      catchError( err => of(false) )
+    );
+
   }
 
 
