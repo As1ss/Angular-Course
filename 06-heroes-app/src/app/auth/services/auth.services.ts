@@ -41,6 +41,11 @@ import { Observable, catchError, map, of, tap } from 'rxjs';
     this._user = undefined;
     localStorage.clear();
   }
+  checkIsLogged():Observable<boolean>{
+    if(!localStorage.getItem("token")) return of(false);
+
+    return of(true);
+  }
 
   checkAuthentication():Observable<boolean> {
 
