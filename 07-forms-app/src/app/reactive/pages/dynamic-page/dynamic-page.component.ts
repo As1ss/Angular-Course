@@ -15,7 +15,8 @@ export class DynamicPageComponent {
   // public myForm:FormGroup = new FormGroup({
   //   name: new FormControl(["",Validators.required,Validators.minLength(3)]),
   //   favoriteGames: new FormArray([
-
+        // new FormControl("Metal Gear",Validators.required),
+        // new FormControl("Death Stranding",Validators.required)
   //   ])
   // })
 
@@ -58,6 +59,12 @@ export class DynamicPageComponent {
       }
     }
     return null;
+  }
+
+  onDeleteFavorite(index:number):void{
+    this.favoriteGames.removeAt(index)
+
+
   }
 
   onSubmit(): void {

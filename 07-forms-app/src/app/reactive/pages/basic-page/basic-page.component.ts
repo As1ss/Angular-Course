@@ -48,6 +48,8 @@ export class BasicPageComponent implements OnInit{
 
     const errors = this.myForm.controls[field].errors || {};
 
+
+
     for (const key in errors) {
        switch(key){
         case "required":

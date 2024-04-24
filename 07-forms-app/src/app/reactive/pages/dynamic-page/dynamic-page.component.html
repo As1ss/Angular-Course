@@ -12,6 +12,7 @@
             <span *ngIf="ifsValidField('name')"
             class="form-text text-danger">
                    {{getFieldError('name')}}
+
             </span>
         </div>
     </div>
@@ -46,14 +47,16 @@
                     <input [formControlName]="i"
                     class="form-control">
 
+
                     <button class="btn btn-outline-danger"
-                            type="button">
+                            type="button"
+                            (click)="onDeleteFavorite(i)">
                       Eliminar
                   </button>
                 </div>
                 <span *ngIf="isValidFieldInArray(favoriteGames,i)"
                 class="form-text text-danger">
-                       Este campo es requerido
+                        Valor requerido.
                 </span>
 
             </div>
