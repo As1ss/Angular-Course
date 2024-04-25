@@ -14,6 +14,8 @@ export class DynamicPageComponent {
   //   ])
   // })
 
+
+
   public myForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     favoriteGames: this.fb.array([
@@ -21,6 +23,7 @@ export class DynamicPageComponent {
       ['Death Stranding', Validators.required],
     ]),
   });
+
 
   public newFavoriteGame:FormControl= new FormControl("",Validators.required);
 
