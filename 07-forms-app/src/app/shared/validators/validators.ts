@@ -17,5 +17,4 @@ export const cantBeStrider = (control:FormControl): ValidationErrors | null => {
     }
   }
   return null;
-
 }

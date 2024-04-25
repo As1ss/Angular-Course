@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ValidatorsService } from '../../../shared/services/validators.service';
 
 
 const rtx5090= {
@@ -28,8 +29,9 @@ export class BasicPageComponent implements OnInit{
     inStorage: new FormControl(0,[Validators.required,Validators.min(0)]),
   });
 
-  constructor(private fb:FormBuilder){
-
+  constructor(
+    private fb:FormBuilder,
+    private validatorsService:ValidatorsService){
   }
   ngOnInit(): void {
   //  this.myForm.reset(rtx5090)
@@ -37,8 +39,7 @@ export class BasicPageComponent implements OnInit{
 
   ifsValidField(field:string):boolean | null{
 
-    return this.myForm.controls[field].errors
-    && this.myForm.controls[field].touched;
+    return this.validatorsService.isValidField(this.myForm,field);
 
   }
 
