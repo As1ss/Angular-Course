@@ -10,7 +10,7 @@
         <div class="col-sm-9">
 
             <div class="form-check">
-                <input class="form-check-input" formControlName="gender" name="form-check"
+                <input class="form-check-input" formControlName="gender"
                        type="radio"
                        value="M"
                        id="radioMasculino">
@@ -20,7 +20,7 @@
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" formControlName="gender" name="form-check"
+                <input class="form-check-input" formControlName="gender"
                        type="radio"
                        value="F"
                        id="radioFemenino">
@@ -59,7 +59,7 @@
                   Términos y condiciones de uso
                 </label>
               </div>
-              <span *ngIf="myForm.controls['termsAndConditions'].invalid && myForm.controls['termsAndConditions'].touched" class="form-text text-danger">
+              <span *ngIf="isValidField('termsAndConditions')" class="form-text text-danger">
                  Debe de aceptar las condiciones de uso
               </span>
 
@@ -85,7 +85,7 @@
 <br>
 
 <h5>Persona</h5>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ person | json }}</pre>
 <br>
 
 <h5>Valid</h5>
