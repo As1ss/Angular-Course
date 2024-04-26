@@ -45,21 +45,7 @@ export class BasicPageComponent implements OnInit{
 
   getFieldError(field:string):string | null{
 
-    if(!this.myForm.controls[field]) return null;
-
-    const errors = this.myForm.controls[field].errors || {};
-
-
-
-    for (const key in errors) {
-       switch(key){
-        case "required":
-          return 'Valor requerido.';
-        case "minlength":
-          return `El valor requerido debe tener mínimo ${ errors['minlength'].requiredLength } caracteres.`;
-       }
-    }
-    return null;
+   return this.validatorsService.getFieldError(this.myForm,field);
   }
 
   onSave():void{

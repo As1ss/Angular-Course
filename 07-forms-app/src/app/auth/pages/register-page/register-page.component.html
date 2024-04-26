@@ -15,7 +15,7 @@
                            placeholder="Nombre del usuario">
 
                     <span *ngIf="isValidField('name')" class="form-text text-danger">
-                        Debe de ser en formato de nombre y apellido
+                        {{getFieldError('name')}}
                     </span>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                            class="form-control"
                            placeholder="Email del usuario">
                     <span *ngIf="isValidField('email')" class="form-text text-danger">
-                        mensaje de error del email
+                        {{ getFieldError('email') }}
                     </span>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                            class="form-control"
                            placeholder="Nombre código del usuario">
                     <span *ngIf="isValidField('userName')" class="form-text text-danger">
-                         El username no puede ser Strider
+                            {{ getFieldError('userName') }}
                     </span>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                            placeholder="Password de su cuenta">
 
                     <span *ngIf="isValidField('password')" class="form-text text-danger">
-                         La contraseña debe de ser mayor de 6 caracteres.
+                         {{ getFieldError("password") }}
                     </span>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                            placeholder="Confirmar la contraseña">
 
                     <span *ngIf="isValidField('password2')" class="form-text text-danger">
-                         Las contraseñas deben de ser iguales
+                          El valor de la contraseña tiene que coincidir.
                     </span>
                 </div>
             </div>

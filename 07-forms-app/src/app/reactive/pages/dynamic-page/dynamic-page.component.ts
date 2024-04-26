@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import {FormArray,FormBuilder,FormControl,FormGroup,Validators} from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ValidatorsService } from '../../../shared/services/validators.service';
 
 @Component({
@@ -10,12 +16,10 @@ export class DynamicPageComponent {
   // public myForm:FormGroup = new FormGroup({
   //   name: new FormControl(["",Validators.required,Validators.minLength(3)]),
   //   favoriteGames: new FormArray([
-        // new FormControl("Metal Gear",Validators.required),
-        // new FormControl("Death Stranding",Validators.required)
+  // new FormControl("Metal Gear",Validators.required),
+  // new FormControl("Death Stranding",Validators.required)
   //   ])
   // })
-
-
 
   public myForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -25,12 +29,14 @@ export class DynamicPageComponent {
     ]),
   });
 
-
-  public newFavoriteGame:FormControl= new FormControl("",Validators.required);
+  public newFavoriteGame: FormControl = new FormControl(
+    '',
+    Validators.required
+  );
 
   constructor(
     private fb: FormBuilder,
-    private validatorsService:ValidatorsService
+    private validatorsService: ValidatorsService
   ) {}
 
   get favoriteGames() {
@@ -38,45 +44,30 @@ export class DynamicPageComponent {
   }
 
   ifsValidField(field: string): boolean | null {
-    return this.validatorsService.isValidField(this.myForm,field);
+    return this.validatorsService.isValidField(this.myForm, field);
   }
 
-  isValidFieldInArray(formArray:FormArray, index: number) {
-    return formArray.controls[index].errors && formArray.controls[index].touched;
-
+  isValidFieldInArray(formArray: FormArray, index: number) {
+    return (
+      formArray.controls[index].errors && formArray.controls[index].touched
+    );
   }
 
   getFieldError(field: string): string | null {
-    if (!this.myForm.controls[field]) return null;
-
-    const errors = this.myForm.controls[field].errors || {};
-
-    for (const key in errors) {
-      switch (key) {
-        case 'required':
-          return 'Valor requerido.';
-        case 'minlength':
-          return `El valor requerido debe tener mínimo ${errors['minlength'].requiredLength} caracteres.`;
-      }
-    }
-    return null;
+    return this.validatorsService.getFieldError(this.myForm, field);
   }
 
-  onAddToFavorites():void{
-    if(this.newFavoriteGame.invalid) return;
+  onAddToFavorites(): void {
+    if (this.newFavoriteGame.invalid) return;
     const newGame = this.newFavoriteGame.value;
 
-    this.favoriteGames.push(
-      this.fb.control(newGame,Validators.required)
-    );
+    this.favoriteGames.push(this.fb.control(newGame, Validators.required));
 
     this.newFavoriteGame.reset();
   }
 
-  onDeleteFavorite(index:number):void{
-    this.favoriteGames.removeAt(index)
-
-
+  onDeleteFavorite(index: number): void {
+    this.favoriteGames.removeAt(index);
   }
 
   onSubmit(): void {

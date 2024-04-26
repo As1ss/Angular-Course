@@ -12,9 +12,9 @@ export class RegisterPageComponent {
 
 
   public myForm:FormGroup = this.fb.group({
-    name: ["",[Validators.required, Validators.pattern(this.validatorsService.firstNameAndLastnamePattern)]],
-    email: ["",[Validators.required, Validators.pattern(this.validatorsService.emailPattern)],[this.emailValidator]],
-    userName: ["",[Validators.required,this.validatorsService.cantBeStrider]],
+    name: ["",[Validators.required, this.validatorsService.firstNameAndLastnameValidator()]],
+    email: ["",[Validators.required, this.validatorsService.emailValidator()],[this.emailValidator]],
+    userName: ["",[Validators.required,this.validatorsService.cantBeStrider()]],
     password: ["",[Validators.required, Validators.minLength(6)]],
     password2: ["",[Validators.required]],
   },{
@@ -35,6 +35,10 @@ export class RegisterPageComponent {
 
    return this.validatorsService.isValidField(this.myForm,field);
 
+  }
+  getFieldError(field:string):string | null {
+
+    return this.validatorsService.getFieldError(this.myForm,field);
   }
 
 
