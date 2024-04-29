@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountriesService } from '../../services/countries-service.service';
 import { Region, SmallCountry } from '../../interfaces/country.interface';
-import { switchMap, tap } from 'rxjs';
+import { filter, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-selector-page',
@@ -17,6 +17,7 @@ export class SelectorPageComponent implements OnInit {
   });
 
   private _countries: SmallCountry[] = [];
+  public borders: string[]= [];
 
   constructor(
     private fb: FormBuilder,
@@ -57,11 +58,14 @@ export class SelectorPageComponent implements OnInit {
       .get('country')!
       .valueChanges.pipe(
         tap(() => this.myForm.get('border')!.setValue('')),
-        // switchMap((region) =>
-        //   this.countriesService.getCountriesByRegion(region))
+        tap(()=> this.borders = []),
+        filter(value => value.length>0),
+        switchMap( alphaCode =>
+          this.countriesService.getCountryByAlphaCode(alphaCode))
       )
-      .subscribe(borders => console.log({ borders }));
+      .subscribe(country => this.borders = country.borders);
   }
+
 
   get countries() {
     return this._countries;
