@@ -8,6 +8,7 @@ import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
 export class ProductComponent implements OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked{
 
   public isProductViewed: boolean = false;
+  public currentPrice : number = 10;
 
 
   constructor(){}
@@ -34,6 +35,10 @@ export class ProductComponent implements OnInit, OnChanges, DoCheck, AfterConten
   }
   ngAfterViewChecked(): void {
     console.log("ngAfterViewChecked");
+  }
+
+  increasePrice(){
+    this.currentPrice++;
   }
 
 }
