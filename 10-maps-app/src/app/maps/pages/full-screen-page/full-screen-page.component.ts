@@ -17,7 +17,7 @@ export class FullScreenPageComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    if(!this.divMap) return;
+    if(!this.divMap)  throw "Elemento HTML no encontrado";
 
     const map = new Map({
       accessToken:"pk.eyJ1IjoiYXMxc3MiLCJhIjoiY2x2bTU0bzFuMDMxZTJxczM2bXhjd2dzMSJ9.xYq12_fIHO6NrKAl8VLZ5g",
