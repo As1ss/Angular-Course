@@ -10,6 +10,8 @@ export class MarkersPageComponent {
   @ViewChild('map')
   public divMap?: ElementRef;
 
+  public markers:Marker[]= [];
+
 
   public map?:Map;
   public currentCoords: LngLat = new LngLat(-2.40, 40.14);
@@ -25,7 +27,7 @@ export class MarkersPageComponent {
       center: this.currentCoords, // starting position [lng, lat]
       zoom: 13, // starting zoom
     });
-
+  }
 
 
   //   const markerHtml = document.createElement("div");
@@ -40,5 +42,29 @@ export class MarkersPageComponent {
 
 
 
+
+  createMarker(){
+    if(!this.map) return;
+
+    const color = '#xxxxxx'.replace(/x/g, y=>(Math.random()*16|0).toString(16));
+    const coords:LngLat = this.map.getCenter();
+
+
+    this.addMarker(coords,color);
   }
+
+  addMarker (coords: LngLat, color:string):void{
+    if (!this.map) {
+      return;
+  }
+      const marker = new Marker({
+        color: color,
+        draggable: true,
+
+      }).setLngLat(coords).addTo(this.map);
+
+      this.markers.push(marker);
+  }
+
+
 }

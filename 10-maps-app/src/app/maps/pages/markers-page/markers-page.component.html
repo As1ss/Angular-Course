@@ -1,11 +1,11 @@
 <div id="map" #map></div>
 
 <ul class="list-group">
-  <li class="list-group-item">
-Marker 1
+  <li *ngFor="let item of markers;let i = index" class="list-group-item">
+    Marker {{i}}
   </li>
 </ul>
 
-<button class="btn btn-primary">
+<button class="btn btn-primary" (click)="createMarker()">
   + Agregar marcador
 </button>
