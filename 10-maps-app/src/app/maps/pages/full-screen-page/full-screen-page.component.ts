@@ -23,8 +23,8 @@ export class FullScreenPageComponent implements AfterViewInit {
       accessToken:"pk.eyJ1IjoiYXMxc3MiLCJhIjoiY2x2bTU0bzFuMDMxZTJxczM2bXhjd2dzMSJ9.xYq12_fIHO6NrKAl8VLZ5g",
       container: this.divMap.nativeElement, // container ID
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
-      center: [-74.5, 40], // starting position [lng, lat]
-      zoom: 9, // starting zoom
+      center: [-5.67, 43.26], // starting position [lng, lat]
+      zoom: 13, // starting zoom
     });
   }
 }

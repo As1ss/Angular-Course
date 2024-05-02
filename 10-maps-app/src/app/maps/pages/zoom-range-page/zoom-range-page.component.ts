@@ -10,9 +10,9 @@ export class ZoomRangePageComponent implements AfterViewInit,OnDestroy {
   @ViewChild('map')
   public divMap?: ElementRef;
 
-  public zoom: number = 10;
+  public zoom: number = 13;
   public map?:Map;
-  public currentCoords: LngLat = new LngLat(-2.40, 40.14);
+  public currentCoords: LngLat = new LngLat(-5.67, 43.26);
 
   ngAfterViewInit(): void {
     if (!this.divMap) throw 'Elemento HTML no encontrado';
