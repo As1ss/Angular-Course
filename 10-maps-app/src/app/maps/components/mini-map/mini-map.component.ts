@@ -24,10 +24,9 @@ export class MiniMapComponent implements AfterViewInit{
     if(!this.coords) throw "Coords required";
     if(!this.divMap?.nativeElement) throw "Map rendered error";
 
-    console.log(this.coords);
+
 
     //crear mapa
-
 
     this.map = new Map({
       accessToken:
