@@ -8,17 +8,17 @@
     <div class="col-2"></div>
     <div class="col">
       <div class="row">
-
         <!-- Houses -->
         <div *ngFor="let item of houses" class="col-4 mb-2">
           <div class="card">
             <!-- <img src=".." class="card-img-top"> -->
-            <maps-mini-map [coords]="item.lngLat"/>
-              <h5 class="card-title"> {{ item.title }}</h5>
-              <p class="card-text">{{ item.description }}</p>
+            <maps-mini-map [coords]="item.lngLat" />
+            <h5 class="card-title">{{ item.title }}</h5>
+            <p class="card-text">{{ item.description }}</p>
           </div>
-
-
+        </div>
+        <div class="col-4 mb-2">
+          <counter-alone [counter]="52"/>
         </div>
       </div>
     </div>
