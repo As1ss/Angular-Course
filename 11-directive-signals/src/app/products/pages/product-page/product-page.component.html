@@ -3,7 +3,7 @@
 
 
 
-<form>
+<form [formGroup]="myForm" (ngSubmit)="changeColor()">
 
   <div class="row g-3 align-items-center mb-3">
 
@@ -12,10 +12,13 @@
       </div>
 
       <div class="col-auto">
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="name">
       </div>
       <div class="col-auto">
-        <span>Algo de información</span>
+        <span customLabel
+        [errors]="myForm.get('name')?.errors"
+        [color]="color"
+        >Temporal</span>
       </div>
   </div>
 
@@ -26,3 +29,9 @@
   </div>
 
 </form>
+
+
+<pre class="mt-5">
+  {{ myForm.get('name')?.errors | json }}
+</pre>
+<p>Color: {{ color }}</p>
