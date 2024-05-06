@@ -42,7 +42,7 @@ export class CustomLabelDirective implements OnInit {
     if (!this.htmlElement) return;
 
     if (!this._errors) {
-      this.htmlElement.nativeElement.innerText = 'No existen errores';
+      this.htmlElement.nativeElement.innerText = '';
       return;
     }
 
@@ -53,7 +53,12 @@ export class CustomLabelDirective implements OnInit {
       return;
     }
     else if(errors.includes("minlength")){
-      this.htmlElement.nativeElement.innerText = "Mínimo de longitud de caracterex kekw";
+      this.htmlElement.nativeElement.innerText = "Se requieren x caracteres";
+      return;
+    }
+    else {
+      this.htmlElement.nativeElement.innerText = "El email no es válido";
+      return;
     }
   }
 }
