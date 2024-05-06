@@ -53,7 +53,9 @@ export class CustomLabelDirective implements OnInit {
       return;
     }
     else if(errors.includes("minlength")){
-      this.htmlElement.nativeElement.innerText = "Se requieren x caracteres";
+      const min = this._errors["minlength"]["requiredLength"];
+      const current = this._errors["minlength"]["actualLength"];
+      this.htmlElement.nativeElement.innerText = `Se requieren ${min} caracteres, caracteres actuales ${current}`;
       return;
     }
     else {
