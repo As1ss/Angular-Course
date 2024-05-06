@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { User } from '../../interfaces/user-request.interface';
 
 @Component({
@@ -17,17 +17,18 @@ export class PropertiesPageComponent {
   public fullName = computed(
     () => `${this.user().first_name} ${this.user().last_name}`
   );
+  public userChangedEffect = effect( () => {
+
+    console.log( `${ this.user().first_name }  ` );
+  } );
 
   onFieldUpdated(field: keyof User, value: string) {
-
-
     // this.user.set({
     //   ...this.user(),
     //   [field]: value
     // })
 
-    this.user.update( current => {
-
+    this.user.update((current) => {
       switch (field) {
         case 'avatar':
           current.avatar = value;
