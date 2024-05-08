@@ -223,19 +223,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppModule = void 0;
 const common_1 = __webpack_require__(6);
-const auth_module_1 = __webpack_require__(7);
+const mongoose_1 = __webpack_require__(7);
+const config_1 = __webpack_require__(8);
+const auth_module_1 = __webpack_require__(9);
 let AppModule = class AppModule {
+    constructor() {
+    }
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule],
+        imports: [
+            config_1.ConfigModule.forRoot(),
+            mongoose_1.MongooseModule.forRoot(process.env.MONGO_UIR),
+            auth_module_1.AuthModule
+        ],
         controllers: [],
         providers: [],
-    })
+    }),
+    __metadata("design:paramtypes", [])
 ], AppModule);
 
 
@@ -248,6 +260,20 @@ module.exports = require("@nestjs/common");
 
 /***/ }),
 /* 7 */
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@nestjs/mongoose");
+
+/***/ }),
+/* 8 */
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@nestjs/config");
+
+/***/ }),
+/* 9 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -261,8 +287,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AuthModule = void 0;
 const common_1 = __webpack_require__(6);
-const auth_service_1 = __webpack_require__(8);
-const auth_controller_1 = __webpack_require__(9);
+const auth_service_1 = __webpack_require__(10);
+const auth_controller_1 = __webpack_require__(11);
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
@@ -275,7 +301,7 @@ exports.AuthModule = AuthModule = __decorate([
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -313,7 +339,7 @@ exports.AuthService = AuthService = __decorate([
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -334,9 +360,9 @@ var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AuthController = void 0;
 const common_1 = __webpack_require__(6);
-const auth_service_1 = __webpack_require__(8);
-const create_auth_dto_1 = __webpack_require__(10);
-const update_auth_dto_1 = __webpack_require__(11);
+const auth_service_1 = __webpack_require__(10);
+const create_auth_dto_1 = __webpack_require__(12);
+const update_auth_dto_1 = __webpack_require__(13);
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -400,7 +426,7 @@ exports.AuthController = AuthController = __decorate([
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -413,22 +439,22 @@ exports.CreateAuthDto = CreateAuthDto;
 
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UpdateAuthDto = void 0;
-const mapped_types_1 = __webpack_require__(12);
-const create_auth_dto_1 = __webpack_require__(10);
+const mapped_types_1 = __webpack_require__(14);
+const create_auth_dto_1 = __webpack_require__(12);
 class UpdateAuthDto extends (0, mapped_types_1.PartialType)(create_auth_dto_1.CreateAuthDto) {
 }
 exports.UpdateAuthDto = UpdateAuthDto;
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ ((module) => {
 
 "use strict";
@@ -496,7 +522,7 @@ module.exports = require("@nestjs/mapped-types");
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("388b6239b943d864ee94")
+/******/ 		__webpack_require__.h = () => ("143afa0e46b0ba11c2e4")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
