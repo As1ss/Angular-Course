@@ -19,17 +19,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a;
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AuthService = void 0;
 const common_1 = __webpack_require__(5);
 const mongoose_1 = __webpack_require__(7);
-const mongoose_2 = __webpack_require__(11);
-const bcryptjs = __webpack_require__(12);
-const user_entity_1 = __webpack_require__(13);
+const jwt_1 = __webpack_require__(11);
+const mongoose_2 = __webpack_require__(12);
+const bcryptjs = __webpack_require__(13);
+const user_entity_1 = __webpack_require__(14);
 let AuthService = class AuthService {
-    constructor(userModel) {
+    constructor(userModel, jwtService) {
         this.userModel = userModel;
+        this.jwtService = jwtService;
     }
     async create(createUserDto) {
         try {
@@ -60,8 +62,8 @@ let AuthService = class AuthService {
         }
         const { password: _, ...rest } = user.toJSON();
         return {
-            ...rest,
-            token: "ABC-123"
+            user: rest,
+            token: this.getJWT({ id: user.id })
         };
     }
     findAll() {
@@ -76,12 +78,15 @@ let AuthService = class AuthService {
     remove(id) {
         return `This action removes a #${id} auth`;
     }
+    getJWT(payload) {
+        const token = this.jwtService.sign(payload);
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(user_entity_1.User.name)),
-    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_2.Model !== "undefined" && mongoose_2.Model) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_2.Model !== "undefined" && mongoose_2.Model) === "function" ? _a : Object, typeof (_b = typeof jwt_1.JwtService !== "undefined" && jwt_1.JwtService) === "function" ? _b : Object])
 ], AuthService);
 
 
@@ -92,7 +97,7 @@ exports.runtime =
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ /* webpack/runtime/getFullHash */
 /******/ (() => {
-/******/ 	__webpack_require__.h = () => ("120b2cd2e3e65bdaf45c")
+/******/ 	__webpack_require__.h = () => ("16303ae9426d2ea33dda")
 /******/ })();
 /******/ 
 /******/ }
