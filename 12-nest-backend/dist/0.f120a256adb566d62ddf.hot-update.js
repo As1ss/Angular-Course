@@ -24,21 +24,45 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AuthService = void 0;
 const common_1 = __webpack_require__(5);
 const mongoose_1 = __webpack_require__(7);
-const user_entity_1 = __webpack_require__(11);
-const mongoose_2 = __webpack_require__(12);
+const mongoose_2 = __webpack_require__(11);
+const bcryptjs = __webpack_require__(12);
+const user_entity_1 = __webpack_require__(13);
 let AuthService = class AuthService {
     constructor(userModel) {
         this.userModel = userModel;
     }
     async create(createUserDto) {
         try {
-            const newUser = new this.userModel(createUserDto);
-            return newUser.save();
+            const { password, ...userData } = createUserDto;
+            const newUser = new this.userModel({
+                password: bcryptjs.hashSync(password, 10),
+                ...userData
+            });
+            await newUser.save();
+            const { password: _, ...user } = newUser.toJSON();
+            return user;
         }
         catch (error) {
-            if (error.code === 11000)
+            if (error.code === 11000) {
                 throw new common_1.BadRequestException(`${createUserDto.email} already exists!`);
+            }
+            throw new common_1.InternalServerErrorException('Something c.Terrible happened!');
         }
+    }
+    async login(loginDto) {
+        const { email, password } = loginDto;
+        const user = await this.userModel.findOne({ email: email });
+        if (!user) {
+            throw new common_1.UnauthorizedException("Not valid credentials(email).");
+        }
+        if (!bcryptjs.compareSync(password, user.password)) {
+            throw new common_1.UnauthorizedException("Not a valid credentials(password)");
+        }
+        const { password: _, ...rest } = user.toJSON();
+        return {
+            user: rest,
+            token: "ABC-123"
+        };
     }
     findAll() {
         return `This action returns all auth`;
@@ -68,7 +92,7 @@ exports.runtime =
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ /* webpack/runtime/getFullHash */
 /******/ (() => {
-/******/ 	__webpack_require__.h = () => ("c62ae311711317b93b7d")
+/******/ 	__webpack_require__.h = () => ("64b09d3e791efc7acc6e")
 /******/ })();
 /******/ 
 /******/ }

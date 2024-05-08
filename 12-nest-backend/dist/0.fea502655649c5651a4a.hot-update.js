@@ -24,15 +24,41 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AuthService = void 0;
 const common_1 = __webpack_require__(5);
 const mongoose_1 = __webpack_require__(7);
-const user_entity_1 = __webpack_require__(11);
-const mongoose_2 = __webpack_require__(12);
+const mongoose_2 = __webpack_require__(11);
+const bcryptjs = __webpack_require__(12);
+const user_entity_1 = __webpack_require__(13);
 let AuthService = class AuthService {
     constructor(userModel) {
         this.userModel = userModel;
     }
-    create(createUserDto) {
-        const newUser = new this.userModel(createUserDto);
-        return newUser.save();
+    async create(createUserDto) {
+        try {
+            const { password, ...userData } = createUserDto;
+            const newUser = new this.userModel({
+                password: bcryptjs.hashSync(password, 10),
+                ...userData
+            });
+            await newUser.save();
+            const { password: _, ...user } = newUser.toJSON();
+            return user;
+        }
+        catch (error) {
+            if (error.code === 11000) {
+                throw new common_1.BadRequestException(`${createUserDto.email} already exists!`);
+            }
+            throw new common_1.InternalServerErrorException('Something c.Terrible happened!');
+        }
+    }
+    async login(loginDto) {
+        const { email, password } = loginDto;
+        const user = await this.userModel.findOne({ email: email });
+        if (!user) {
+            throw new common_1.UnauthorizedException("Not valid credentials(email).");
+        }
+        if (!user.password) {
+            throw new common_1.UnauthorizedException("Not a valid credentials(password)");
+        }
+        return "Todo ok";
     }
     findAll() {
         return `This action returns all auth`;
@@ -62,7 +88,7 @@ exports.runtime =
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ /* webpack/runtime/getFullHash */
 /******/ (() => {
-/******/ 	__webpack_require__.h = () => ("6d4051b4e79b80d4b7e7")
+/******/ 	__webpack_require__.h = () => ("51c8cd89ee5f730d4f3a")
 /******/ })();
 /******/ 
 /******/ }
