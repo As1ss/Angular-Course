@@ -289,6 +289,8 @@ exports.AuthModule = void 0;
 const common_1 = __webpack_require__(6);
 const auth_service_1 = __webpack_require__(10);
 const auth_controller_1 = __webpack_require__(11);
+const mongoose_1 = __webpack_require__(7);
+const user_entity_1 = __webpack_require__(15);
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
@@ -296,6 +298,12 @@ exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         controllers: [auth_controller_1.AuthController],
         providers: [auth_service_1.AuthService],
+        imports: [
+            mongoose_1.MongooseModule.forFeature([{
+                    name: user_entity_1.User.name,
+                    schema: user_entity_1.UserSchema
+                }])
+        ]
     })
 ], AuthModule);
 
@@ -460,6 +468,53 @@ exports.UpdateAuthDto = UpdateAuthDto;
 "use strict";
 module.exports = require("@nestjs/mapped-types");
 
+/***/ }),
+/* 15 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UserSchema = exports.User = void 0;
+const mongoose_1 = __webpack_require__(7);
+let User = class User {
+};
+exports.User = User;
+__decorate([
+    (0, mongoose_1.Prop)({ unique: true, required: true }),
+    __metadata("design:type", String)
+], User.prototype, "email", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], User.prototype, "name", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ minlength: 6, required: true }),
+    __metadata("design:type", String)
+], User.prototype, "password", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: true }),
+    __metadata("design:type", Boolean)
+], User.prototype, "isActive", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: [String], default: ["user"] }),
+    __metadata("design:type", Array)
+], User.prototype, "roles", void 0);
+exports.User = User = __decorate([
+    (0, mongoose_1.Schema)()
+], User);
+exports.UserSchema = mongoose_1.SchemaFactory.createForClass(User);
+
+
 /***/ })
 /******/ 	]);
 /************************************************************************/
@@ -522,7 +577,7 @@ module.exports = require("@nestjs/mapped-types");
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("143afa0e46b0ba11c2e4")
+/******/ 		__webpack_require__.h = () => ("d2d83a0ac2ff17445dda")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
