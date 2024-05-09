@@ -371,6 +371,20 @@ let AuthService = class AuthService {
             throw new common_1.InternalServerErrorException('Something c.Terrible happened!');
         }
     }
+    async register(registerUserDTO) {
+        const { password, password2, rol } = registerUserDTO;
+        if (password !== password2) {
+            throw new common_1.UnauthorizedException("The password doesnt match");
+        }
+        if (rol !== "user" && rol !== "admin") {
+            throw new common_1.UnauthorizedException("The rol only can be user or admin");
+        }
+        const user = await this.create(registerUserDTO);
+        return {
+            user: user,
+            token: this.getJWT({ id: user._id })
+        };
+    }
     async login(loginDto) {
         const { email, password } = loginDto;
         const user = await this.userModel.findOne({ email: email });
@@ -497,14 +511,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c, _d;
+var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AuthController = void 0;
 const common_1 = __webpack_require__(5);
 const auth_service_1 = __webpack_require__(10);
-const create_user_dto_1 = __webpack_require__(16);
-const update_auth_dto_1 = __webpack_require__(18);
-const login_dto_1 = __webpack_require__(20);
+const dto_1 = __webpack_require__(16);
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -514,6 +526,9 @@ let AuthController = class AuthController {
     }
     login(loginDto) {
         return this.authService.login(loginDto);
+    }
+    register(registerUserDto) {
+        return this.authService.register(registerUserDto);
     }
     findAll() {
         return this.authService.findAll();
@@ -533,16 +548,23 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_b = typeof create_user_dto_1.CreateUserDto !== "undefined" && create_user_dto_1.CreateUserDto) === "function" ? _b : Object]),
+    __metadata("design:paramtypes", [typeof (_b = typeof dto_1.CreateUserDto !== "undefined" && dto_1.CreateUserDto) === "function" ? _b : Object]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "create", null);
 __decorate([
     (0, common_1.Post)("/login"),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_c = typeof login_dto_1.LoginDto !== "undefined" && login_dto_1.LoginDto) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [typeof (_c = typeof dto_1.LoginDto !== "undefined" && dto_1.LoginDto) === "function" ? _c : Object]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "login", null);
+__decorate([
+    (0, common_1.Post)("/register"),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_d = typeof dto_1.RegisterUserDto !== "undefined" && dto_1.RegisterUserDto) === "function" ? _d : Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "register", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
@@ -561,7 +583,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_d = typeof update_auth_dto_1.UpdateAuthDto !== "undefined" && update_auth_dto_1.UpdateAuthDto) === "function" ? _d : Object]),
+    __metadata("design:paramtypes", [String, typeof (_e = typeof dto_1.UpdateAuthDto !== "undefined" && dto_1.UpdateAuthDto) === "function" ? _e : Object]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "update", null);
 __decorate([
@@ -583,6 +605,33 @@ exports.AuthController = AuthController = __decorate([
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__webpack_require__(17), exports);
+__exportStar(__webpack_require__(19), exports);
+__exportStar(__webpack_require__(20), exports);
+__exportStar(__webpack_require__(21), exports);
+
+
+/***/ }),
+/* 17 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -594,7 +643,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateUserDto = void 0;
-const class_validator_1 = __webpack_require__(17);
+const class_validator_1 = __webpack_require__(18);
 class CreateUserDto {
 }
 exports.CreateUserDto = CreateUserDto;
@@ -613,33 +662,54 @@ __decorate([
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = require("class-validator");
 
 /***/ }),
-/* 18 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.UpdateAuthDto = void 0;
-const mapped_types_1 = __webpack_require__(19);
-const create_user_dto_1 = __webpack_require__(16);
-class UpdateAuthDto extends (0, mapped_types_1.PartialType)(create_user_dto_1.CreateUserDto) {
-}
-exports.UpdateAuthDto = UpdateAuthDto;
-
-
-/***/ }),
 /* 19 */
-/***/ ((module) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-module.exports = require("@nestjs/mapped-types");
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RegisterUserDto = void 0;
+const class_validator_1 = __webpack_require__(18);
+class RegisterUserDto {
+}
+exports.RegisterUserDto = RegisterUserDto;
+__decorate([
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], RegisterUserDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RegisterUserDto.prototype, "name", void 0);
+__decorate([
+    (0, class_validator_1.MinLength)(6),
+    __metadata("design:type", String)
+], RegisterUserDto.prototype, "password", void 0);
+__decorate([
+    (0, class_validator_1.MinLength)(6),
+    __metadata("design:type", String)
+], RegisterUserDto.prototype, "password2", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RegisterUserDto.prototype, "rol", void 0);
+
 
 /***/ }),
 /* 20 */
@@ -658,7 +728,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LoginDto = void 0;
-const class_validator_1 = __webpack_require__(17);
+const class_validator_1 = __webpack_require__(18);
 class LoginDto {
 }
 exports.LoginDto = LoginDto;
@@ -671,6 +741,28 @@ __decorate([
     __metadata("design:type", String)
 ], LoginDto.prototype, "password", void 0);
 
+
+/***/ }),
+/* 21 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UpdateAuthDto = void 0;
+const mapped_types_1 = __webpack_require__(22);
+const create_user_dto_1 = __webpack_require__(17);
+class UpdateAuthDto extends (0, mapped_types_1.PartialType)(create_user_dto_1.CreateUserDto) {
+}
+exports.UpdateAuthDto = UpdateAuthDto;
+
+
+/***/ }),
+/* 22 */
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@nestjs/mapped-types");
 
 /***/ })
 /******/ 	]);
@@ -734,7 +826,7 @@ __decorate([
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("606dfa331ccb79976c84")
+/******/ 		__webpack_require__.h = () => ("48de357b3c18b0288207")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */

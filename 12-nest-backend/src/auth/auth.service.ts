@@ -1,3 +1,4 @@
+import { LoginResponse } from './interfaces/login-response';
 import {BadRequestException, Injectable, InternalServerErrorException, UnauthorizedException} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { JwtService } from '@nestjs/jwt';
@@ -5,11 +6,10 @@ import { Model } from 'mongoose';
 
 import * as bcryptjs from "bcryptjs";
 
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { CreateUserDto, UpdateAuthDto, LoginDto, RegisterUserDto } from './dto';
 import { User } from './entities/user.entity';
-import { LoginDto } from './dto/login.dto';
 import { JwtPayload } from './interfaces/jwt-payload';
+
 
 @Injectable()
 export class AuthService {
@@ -30,8 +30,7 @@ export class AuthService {
         password: bcryptjs.hashSync(password, 10),
         ...userData
       });
-      //2.- Guardar el usuario
-
+   
 
       await newUser.save();
 
@@ -46,8 +45,29 @@ export class AuthService {
       throw new InternalServerErrorException('Something c.Terrible happened!');
     }
   }
+
+  async register(registerUserDTO:RegisterUserDto):Promise<LoginResponse>{
+
+
+    const {password, password2, rol } = registerUserDTO;
+
+    if(password !== password2){
+      throw new UnauthorizedException("The password doesnt match");
+    }
+
+    if(rol!=="user" && rol!=="admin" ){
+      throw new UnauthorizedException("The rol only can be user or admin");
+    }
+
+    const user = await this.create(registerUserDTO);
+
+    return {
+      user:user,
+      token: this.getJWT({id: user._id})
+    }
+  }
   
-  async login( loginDto:LoginDto ){
+  async login( loginDto:LoginDto ):Promise<LoginResponse>{
     const { email, password } = loginDto;
 
     const user = await this.userModel.findOne({ email: email });
@@ -59,8 +79,6 @@ export class AuthService {
     if(!bcryptjs.compareSync(password,user.password)){
       throw new UnauthorizedException("Not a valid credentials(password)");
     }
-
-
 
     const { password:_,...rest} = user.toJSON();
 
